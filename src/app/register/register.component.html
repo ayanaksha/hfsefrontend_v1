@@ -1,0 +1,91 @@
+<!-- <h1>Welcome ! {{ username }} </h1> -->
+<!-- <app-volunteer></app-volunteer> -->
+<!-- <div class="container">
+    <a routerLink = '/volunteer'>click here</a> to look at the complete list outreach event to register from the Opportunities listed
+</div> -->
+<!-- <div class="container">
+    Click here to get customized contents for you .
+    <button (click)="getmsg()" class="btn btn-success">Check</button>
+</div> -->
+<!-- <div class="container">
+    Click here to get customized contents for you .
+    <button (click)="getmsgwithparam()" class="btn btn-success">Check</button>
+</div>
+<div class="container">
+    Response Message from Service .....
+    {{ responseMsg }}
+</div> -->
+
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="BUID" [(ngModel)]="buid" name="buid" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="empid" [(ngModel)]="empid" type="empid" name="password" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="empname" [(ngModel)]="empname" type="empname" name="password" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="ID" [(ngModel)]="id" type="id" name="id" required>
+                    </mat-form-field>
+                </td>
+            </tr> -->
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="id" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Project Id" [(ngModel)]="projid" type="projid" name="id" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Role" [(ngModel)]="role" type="role" name="id" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="EmailID" [(ngModel)]="useremailid" type="useremailid" name="id" required>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        </form>
+        <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="handleRegistration()" color="primary">Register</button>
+        <!-- <button mat-raised-button (click)="getmsg()" color="primary">Register</button> -->
+    </mat-card-actions>
+</mat-card>      
+
