@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = false
       this.errmessage = 'Login Successful'
       // this.router.navigate(['logout',this.empid])
-      // this.router.navigate(['logout'])
+      // this.router.navigateByUrl('httplogout')
     }
     else{
       this.invalidLogin = true
