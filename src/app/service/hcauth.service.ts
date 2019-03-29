@@ -28,12 +28,12 @@ export class HcauthService {
       data => {
         console.log(data);
         this.user = data.loggedInUser;
-        console.log(this.user.role);
-        if (this.user.role = 'POC'){
-          console.log('Routing to volunteer');
-          this.router.navigate(['volunteer','POC'])
-          return true;
-        }
+        // console.log(this.user.role);
+        // if (this.user.role = 'POC'){
+        //   console.log('Routing to volunteer');
+        //   this.router.navigate(['volunteer','POC'])
+        //   return true;
+        // }
         // this.router.navigate(['volunteer']);
         
       },
