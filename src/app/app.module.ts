@@ -18,10 +18,11 @@ import { StatsComponent } from './stats/stats.component';
 import { EventDashComponent } from './event-dash/event-dash.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatDialogModule, MatTableModule, MatProgressSpinnerModule,
-         MatInputModule, MatOptionModule, MatSelectModule, MatGridListModule, 
+         MatInputModule, MatTabsModule, MatOptionModule, MatSelectModule, MatGridListModule, 
          MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TestComponent } from './test/test.component';
+import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TestComponent } from './test/test.component';
     LogoutComponent,
     StatsComponent,
     EventDashComponent,
-    TestComponent
+    TestComponent,
+    VolunteerDashComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { TestComponent } from './test/test.component';
     MatInputModule,
     MatOptionModule, 
     MatSelectModule,
+    MatTabsModule,
     MatToolbarModule,
     MatButtonModule, 
     MatCardModule,
