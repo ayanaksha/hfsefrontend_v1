@@ -7,28 +7,28 @@ export class UserLogin {
 // /* POST /api/v1/online-sales-service/allEventRegistration */
 // /*---- NOT WORKING*/
 
-// /* POST /online-sales-service/createEvent */
-// export class eventCreate 
-// {
-//     activityType: string;
-//     boardingPoints: string;
-//     category: string;
-//     council: string;
-//     dropPoints: string;
-//     endTime: string;
-//     eventDate: string;
-//     eventDesc: string;
-//     eventID: number;
-//     eventName: string;
-//     livesTouched: string;
-//     location: string;
-//     pocID: number;
-//     pocName: string;
-//     startTime: string;
-//     status: string;
-//     venueAddress: string;
-//     volunteersReq: string;
-//   }
+/* POST /online-sales-service/createEvent */
+export class eventCreate 
+{
+    activityType: string;
+    boardingPoints: string;
+    category: string;
+    council: string;
+    dropPoints: string;
+    endTime: string;
+    eventDate: string;
+    eventDesc: string;
+    eventID: number;
+    eventName: string;
+    livesTouched: string;
+    location: string;
+    pocID: number;
+    pocName: string;
+    startTime: string;
+    status: string;
+    venueAddress: string;
+    volunteersReq: string;
+  }
 
 //   export class eventCreateBulk
 // //   [

@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { RouteGuardService } from './service/route-guard.service';
 import { StatsComponent } from './stats/stats.component';
 import { VolunteerDashComponent } from 'src/app/volunteer-dash/volunteer-dash.component';
+import { PocDashComponent } from 'src/app/poc-dash/poc-dash.component';
 
 const routes: Routes = [
   { path:'', component: LoginComponent }
@@ -15,6 +16,7 @@ const routes: Routes = [
   ,{ path:'register/:name', component: RegisterComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteer', component: VolunteerComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteerdash', component: VolunteerDashComponent }
+  ,{ path:'pocdash', component: PocDashComponent }
   ,{ path:'logout', component: LogoutComponent, canActivate:[RouteGuardService]}
   ,{ path:'bar-chart', component: StatsComponent } 
   // ,{ path:'**', component: ErrorComponent, canActivate:[RouteGuardService] }

@@ -17,12 +17,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { StatsComponent } from './stats/stats.component';
 import { EventDashComponent } from './event-dash/event-dash.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatDialogModule, MatTableModule, MatProgressSpinnerModule,
+import { MatToolbarModule, MatDialogModule, MatDividerModule, MatTableModule, MatProgressSpinnerModule,
          MatInputModule, MatTabsModule, MatOptionModule, MatSelectModule, MatGridListModule, 
          MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TestComponent } from './test/test.component';
 import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.component';
+import { PocDashComponent } from './poc-dash/poc-dash.component';
+import { EventregComponent } from './eventreg/eventreg.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.componen
     StatsComponent,
     EventDashComponent,
     TestComponent,
-    VolunteerDashComponent
+    VolunteerDashComponent,
+    PocDashComponent,
+    EventregComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.componen
     MatOptionModule, 
     MatSelectModule,
     MatTabsModule,
+    MatDividerModule,
     MatToolbarModule,
     MatButtonModule, 
     MatCardModule,

@@ -18,14 +18,20 @@ export class UserServiceService {
     return this.http.post(url, newUser);
   }  
 
-  userCheck(newUser:userID): Observable<any>{
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    return this.http.post(url, newUser);
-  } 
+  // userCheck(newUser:userID): Observable<any>{
+  //   const url = "https://jsonplaceholder.typicode.com/posts";
+  //   return this.http.post(url, newUser);
+  // } 
   // : userRegistration
   registerUser(newUser): Observable<any>{
     const url = "http://localhost:5000" + "/api/v1/online-sales-service/registerUser";
     return this.http.post(url,newUser, {responseType: 'text'})
+  }
+
+  // : eventRegistration
+  registerEvent(newEvent): Observable<any>{
+    const url = "http://localhost:5000" + "/api/v1/online-sales-service/registerUser";
+    return this.http.post(url,newEvent, {responseType: 'text'})
   }
 
 }
