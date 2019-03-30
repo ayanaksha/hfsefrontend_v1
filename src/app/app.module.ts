@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts' ;
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +60,7 @@ import { EventregComponent } from './eventreg/eventreg.component';
     MatTableModule,
     MatMenuModule,
     MatIconModule,
+    FileUploadModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
     FormsModule,

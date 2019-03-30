@@ -30,8 +30,9 @@ export class UserServiceService {
 
   // : eventRegistration
   registerEvent(newEvent): Observable<any>{
-    const url = "http://localhost:5000" + "/api/v1/online-sales-service/registerUser";
+    const url = "http://localhost:5000" + "/api/v1/online-sales-service/createEvent";
     return this.http.post(url,newEvent, {responseType: 'text'})
   }
 
+  
 }

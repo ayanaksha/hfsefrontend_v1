@@ -8,10 +8,9 @@
           <app-stats></app-stats>
       </mat-grid-tile>
       <mat-grid-tile>
-        <app-stats></app-stats>
+        <input ng2FileSelect type="file" accept=".xlsx" [uploader]="uploader"/>
       </mat-grid-tile>
       <!-- <mat-grid-tile>
-          <app-eventreg></app-eventreg>
           <mat-accordion>
             
               <mat-expansion-panel>
@@ -36,12 +35,13 @@
       </mat-grid-tile> -->
     </mat-grid-list>
     <mat-divider [inset]="true"></mat-divider>
-    <mat-grid-list cols="2" rowHeight="2:1">
+    <app-eventreg></app-eventreg>
+    <!-- <mat-grid-list cols="2" rowHeight="2:1">
       <mat-grid-tile>
-          <img mat-card-image src="https://www.thecognizant.com/site/assets/files/1126/outreach-e1519135376902.1200x450.jpg" alt="COGNIZANT OUTReach">
+        <app-eventreg></app-eventreg>
       </mat-grid-tile>
       <mat-grid-tile>
-        <!-- <mat-grid-tile-header>LOGIN</mat-grid-tile-header> -->
+        <mat-grid-tile-header>LOGIN</mat-grid-tile-header>
         <mat-card class="example-card">
           <mat-card-header>
             <mat-card-title>Login</mat-card-title>
@@ -69,9 +69,9 @@
           </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
-  </mat-grid-list>
+  </mat-grid-list> -->
   </mat-tab>
   <mat-tab label="Second"> Events Grid
-      <app-event-dash></app-event-dash>
+      <!-- <app-event-dash></app-event-dash> -->
   </mat-tab>
 </mat-tab-group>

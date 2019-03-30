@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
   //ActivatedRoute
   constructor(private route: ActivatedRoute,
-    private userRegistrationService: UserServiceService,
+    private userAPIService: UserServiceService,
     private service: HelloworldmsgService) { }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     newUser.projId = this.projid;
     newUser.role = this.role;
     newUser.userEmailId = this.useremailid;
-    this.userRegistrationService.registerUser(newUser).subscribe(
+    this.userAPIService.registerUser(newUser).subscribe(
       // response => this.handleSuccessfulRequest(response),
       response => {console.log('Response is ' + '' + response)}, 
       error => this.handleErrorResponse(error)     
