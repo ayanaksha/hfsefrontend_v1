@@ -16,7 +16,9 @@ const routes: Routes = [
   ,{ path:'register/:name', component: RegisterComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteer', component: VolunteerComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteerdash', component: VolunteerDashComponent }
+  ,{ path:'volunteerdash/:name', component: VolunteerDashComponent }
   ,{ path:'pocdash', component: PocDashComponent }
+  ,{ path:'pocdash/:name', component: PocDashComponent }
   ,{ path:'logout', component: LogoutComponent, canActivate:[RouteGuardService]}
   ,{ path:'bar-chart', component: StatsComponent } 
   // ,{ path:'**', component: ErrorComponent, canActivate:[RouteGuardService] }

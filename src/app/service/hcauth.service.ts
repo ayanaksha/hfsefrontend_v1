@@ -3,15 +3,19 @@ import { Router } from '@angular/router';
 import { UserServiceService } from "../service/data/user-service.service";
 import { HttpClient } from '@angular/common/http';
 import { UserLogin, userRegistration } from '../classes/AllClasses';
+import { eventDataService } from 'src/app/service/data/event-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HcauthService {
   
+  jsonData: any;
+
   constructor(private userservice1: UserServiceService,
     private http:HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private dataPassage: eventDataService) { }
   
   user : userRegistration[];
   ;
@@ -27,8 +31,17 @@ export class HcauthService {
       // });
       data => {
         console.log(data);
-        this.user = data.loggedInUser;
-        // console.log(this.user.role);
+        this.user = data['loggedInUser'];
+        this.jsonData = data;
+        console.log('ROLE',this.jsonData['loggedInUser'].role);
+        var userData = new userRegistration;
+        userData = this.jsonData['loggedInUser'];
+        this.dataPassage.storeUserData(userData);
+        if (this.jsonData['loggedInUser'].role == 'POC'){
+          this.router.navigate(['pocdash',this.jsonData['loggedInUser'].empid])
+        }else if(this.jsonData['loggedInUser'].role == 'Volunteer'){
+          this.router.navigate(['volunteerdash',this.jsonData['loggedInUser'].empid])
+        }
         // if (this.user.role = 'POC'){
         //   console.log('Routing to volunteer');
         //   this.router.navigate(['volunteer','POC'])

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserLogin, userRegistration } from 'src/app/classes/AllClasses';
+import { UserLogin, userRegistration, eventCreate } from 'src/app/classes/AllClasses';
 import { Observable } from 'rxjs';
 import { userID } from 'src/app/classes/userID';
 
@@ -32,6 +32,12 @@ export class UserServiceService {
   registerEvent(newEvent): Observable<any>{
     const url = "http://localhost:5000" + "/api/v1/online-sales-service/createEvent";
     return this.http.post(url,newEvent, {responseType: 'text'})
+  }
+
+  // : getEventByPOC
+  getEventByPOC(newUser): Observable<eventCreate>{
+    const url = "http://localhost:5000" + "/api/v1/online-sales-service/eventcreatedByPOC";
+    return this.http.post(url,newUser)
   }
 
   
