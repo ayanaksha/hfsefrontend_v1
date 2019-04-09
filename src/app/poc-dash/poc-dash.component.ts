@@ -18,7 +18,7 @@ export class PocDashComponent implements OnInit {
   responseMsg: any;
   // events: eventCreate[];
   // events: Array<eventCreate> = [];
-  events:eventCreate[];
+  events:eventCreate;
   teststring: string; /* test */
 
   constructor(private fileUploadService: UserServiceService,

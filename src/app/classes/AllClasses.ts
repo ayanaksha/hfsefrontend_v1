@@ -104,23 +104,39 @@ export class eventCreate
 //     status: string;
 //   }
 
-//   /* POST /api/v1/online-sales-service/registerForAnEvent */
-//   export class eventRegistrationUser
-//   {
-//     beneficiaryName:  string;
-//     buid:  string;
-//     councilName:  string;
-//     empID: number;
-//     empName:  string;
-//     empProjId: number;
-//     eventDate:  string;
-//     eventDesc:  string;
-//     eventID: number;
-//     eventLocation:  string;
-//     eventName:  string;
-//     id: number;
-//     status: string;
-//   }
+  /* POST /api/v1/online-sales-service/registerForAnEvent */
+  export class eventRegistrationUser
+  {
+    beneficiaryName:  string;
+    buid:  string;
+    councilName:  string;
+    empID: number;
+    empName:  string;
+    empProjId: number;
+    eventDate:  string;
+    eventDesc:  string;
+    eventID: number;
+    eventLocation:  string;
+    eventName:  string;
+    id: number;
+    status: string;
+  }
+
+  export class eventsRegisteredByVolunteers{
+    id: number;
+    eventID: number;
+    empID: number;
+    empName: String;
+    eventLocation: String;
+    beneficiaryName: String;
+    councilName: String;
+    eventName: String;
+    eventDesc: String;
+    eventDate: String;
+    buid: String;
+    empProjId: number;
+    status: String;
+  }
 
   /* POST /api/v1/online-sales-service/registerUser */
   export class userRegistration

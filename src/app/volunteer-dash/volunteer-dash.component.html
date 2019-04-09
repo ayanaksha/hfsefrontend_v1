@@ -2,7 +2,7 @@
   Welcome {{ this.userData.empname }}
 </p>
 <mat-tab-group>
-  <mat-tab label="First"> POC Dashboard 
+  <mat-tab label="First"> Volunteering Dashboard 
     <mat-grid-list cols="2" rowHeight="1:1">
       <mat-grid-tile>
           <app-stats></app-stats>
@@ -78,6 +78,7 @@
           <!-- <caption>Events</caption> -->
           <thead>
             <tr>
+              <th>Event ID</th>
               <th>POC Name</th>
               <th>Event Name</th>
               <th>Category</th>
@@ -87,11 +88,17 @@
           <tbody>
             <tr *ngFor="let event of events">
               <!-- <tr>   -->
+              <td>{{ event.eventID }}</td>
               <td>{{ event.pocName }}</td>
               <td>{{ event.eventName }}</td>
               <td>{{ event.category }}</td>
               <td>{{ event.volunteersReq }}</td>
-              <td><button mat-raised-button (click)="handleLogin()" color="primary">Login</button></td>
+              <td><button mat-raised-button 
+                (click)="registerForEvent(event.eventID,
+                                          event.eventDate,
+                                          event.eventDesc,
+                                          event.eventLocation)" 
+                                          color="primary">Volunteer</button></td>
               <!-- activityType: string;
               boardingPoints: string;
               category: string;
@@ -111,6 +118,50 @@
               venueAddress: string;
               volunteersReq: string; -->
             </tr>
+          </tbody>
+        </table>
+      </div>
+  </mat-tab>
+  <mat-tab label="Third"> 
+      <!-- <app-event-dash></app-event-dash> -->
+      <div class="container">
+        <table class="table">
+          <!-- <caption>Events</caption> -->
+          <thead>
+            <tr>
+              <th>Event ID</th>
+              <th>Employee Name</th>
+              <th>Event Name</th>
+              <th>Event Description</th>
+              <th>Event Date</th>
+              <th>Employee BUID</th>
+              <th>Employee Project ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let event of eventsRegisteredByUser">
+              <!-- <tr>   -->
+              <td>{{ event.eventID }}</td>
+              <td>{{ event.empName }}</td>
+              <td>{{ event.eventName }}</td>
+              <td>{{ event.eventDesc }}</td>
+              <td>{{ event.eventDate }}</td>
+              <td>{{ event.buid }}</td>
+              <td>{{ event.empProjId }}</td>
+              <!-- id: number;
+              eventID: number;
+              empID: number;
+              empName: String;
+              eventLocation: String;
+              beneficiaryName: String;
+              councilName: String;
+              eventName: String;
+              eventDesc: String;
+              eventDate: String;
+              buid: String;
+              empProjId: number;
+              status: String;
+              </tr> -->
           </tbody>
         </table>
       </div>
