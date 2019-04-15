@@ -35,10 +35,21 @@
               </td>
           </tr>
           <tr>
-              <td>
+              <!-- <td>
                   <mat-form-field class="example-full-width">
                   <input matInput placeholder="category" [(ngModel)]="category" type="category" name="category" required>
                   </mat-form-field>
+              </td> -->
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Category</mat-label>
+                  <mat-select [(value)]="category">
+                    <mat-option>None</mat-option>
+                    <mat-option value="Education">Education</mat-option>
+                    <mat-option value="Donation">Donation</mat-option>
+                    <mat-option value="Community">Community</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </td>
           </tr>
           <tr>

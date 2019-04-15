@@ -7,6 +7,7 @@ import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { eventDataService } from 'src/app/service/data/event-data.service';
 import { userRegistration, eventCreate, eventRegistrationUser, eventsRegisteredByVolunteers } from 'src/app/classes/AllClasses';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer-dash',
@@ -18,6 +19,7 @@ export class VolunteerDashComponent implements OnInit {
   fileToUpload: File = null;
   userData: userRegistration;
   responseMsg: any;
+  jsonData: any;
   // events: eventCreate[];
   // events: Array<eventCreate> = [];
   events:eventCreate[];
@@ -26,7 +28,8 @@ export class VolunteerDashComponent implements OnInit {
 
   constructor(private fileUploadService: UserServiceService,
               private getUserDataService: eventDataService,
-              private userAPIService: UserServiceService) { }
+              private userAPIService: UserServiceService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log('Getting User Details');
@@ -130,6 +133,7 @@ export class VolunteerDashComponent implements OnInit {
         // this.events = response.jsonData;
         this.newRegistrationResponse = response
         console.log('Events'+this.newRegistrationResponse);
+        this.router.navigate(['volunteerdash',this.userData.empid])
       }, 
       // data => {
       //   console.log('Response is ' + '' + data)

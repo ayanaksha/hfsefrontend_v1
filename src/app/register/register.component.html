@@ -66,11 +66,22 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <!-- <td>
                     <mat-form-field class="example-full-width">
                     <input matInput placeholder="Role" [(ngModel)]="role" type="role" name="id" required>
                     </mat-form-field>
-                </td>
+                </td> -->
+                <td>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Role</mat-label>
+                      <mat-select [(value)]="role">
+                        <mat-option>None</mat-option>
+                        <mat-option value="volunteer">volunteer</mat-option>
+                        <mat-option value="POC">POC</mat-option>
+                        <mat-option value="PM">PM</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
             </tr>
             <tr>
                 <td>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HelloworldmsgService } from '../service/data/helloworldmsg.service';
 import { userRegistration } from 'src/app/classes/AllClasses';
 import { UserServiceService } from 'src/app/service/data/user-service.service';
@@ -29,11 +29,13 @@ export class RegisterComponent implements OnInit {
   projid: number;
   role:  string;
   useremailid: string;
+  jsonData: any;
 
   //ActivatedRoute
   constructor(private route: ActivatedRoute,
     private userAPIService: UserServiceService,
-    private service: HelloworldmsgService) { }
+    private service: HelloworldmsgService,
+    private router: Router) { }
 
   ngOnInit() {
     console.log(this.route.snapshot.params['name'])
@@ -61,7 +63,8 @@ export class RegisterComponent implements OnInit {
     newUser.userEmailId = this.useremailid;
     this.userAPIService.registerUser(newUser).subscribe(
       // response => this.handleSuccessfulRequest(response),
-      response => {console.log('Response is ' + '' + response)}, 
+      response => {console.log('RegisterUser Response is ' + '' + response)
+      this.router.navigate(['login'])}, 
       error => this.handleErrorResponse(error)     
     );
 
