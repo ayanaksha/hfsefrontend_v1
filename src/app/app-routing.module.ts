@@ -13,6 +13,7 @@ import { PocDashComponent } from 'src/app/poc-dash/poc-dash.component';
 const routes: Routes = [
   { path:'', component: LoginComponent }
   ,{ path:'login', component: LoginComponent }
+  ,{ path:'login/:name', component: LoginComponent }
   ,{ path:'register/:name', component: RegisterComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteer', component: VolunteerComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteerdash', component: VolunteerDashComponent }

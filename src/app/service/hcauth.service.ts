@@ -4,6 +4,7 @@ import { UserServiceService } from "../service/data/user-service.service";
 import { HttpClient } from '@angular/common/http';
 import { UserLogin, userRegistration } from '../classes/AllClasses';
 import { eventDataService } from 'src/app/service/data/event-data.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class HcauthService {
   constructor(private userservice1: UserServiceService,
     private http:HttpClient,
     private router: Router,
-    private dataPassage: eventDataService) { }
+    private dataPassage: eventDataService,
+    private snackBar: MatSnackBar) { }
   
   user : userRegistration[];
   ;
@@ -39,8 +41,18 @@ export class HcauthService {
         this.dataPassage.storeUserData(userData);
         if (this.jsonData['loggedInUser'].role == 'POC'){
           this.router.navigate(['pocdash',this.jsonData['loggedInUser'].empid])
-        }else if(this.jsonData['loggedInUser'].role == 'Volunteer'){
+          sessionStorage.setItem('auth',empid)
+          localStorage.setItem('role',this.jsonData['loggedInUser'].role)
+          this.snackBar.open('Login Successful', 'Undo', {
+            duration: 3000
+          });
+        }else if(this.jsonData['loggedInUser'].role == 'Volunteer' || 'volunteer'){
           this.router.navigate(['volunteerdash',this.jsonData['loggedInUser'].empid])
+          sessionStorage.setItem('auth',empid)
+          localStorage.setItem('role',this.jsonData['loggedInUser'].role)
+          this.snackBar.open('Login Successful', 'Undo', {
+            duration: 3000
+          });
         }
         // if (this.user.role = 'POC'){
         //   console.log('Routing to volunteer');
@@ -77,7 +89,32 @@ export class HcauthService {
     return !(user === null)
   }
 
+  isPOCLoggedIn(){
+    let POCUser = sessionStorage.getItem('auth')
+    let POCRole = localStorage.getItem('role')
+    if(POCRole === 'POC'){
+      console.log('POC is Logged In !!!!!!!!!!!!!!!')
+      return !(POCUser === null)
+    }else{
+      return false
+    }
+   
+  }
+
+  isVolunteerLoggedIn(){
+    let VolunteerUser = sessionStorage.getItem('auth')
+    let VolunteerRole = localStorage.getItem('role')
+    if(VolunteerRole === 'Volunteer' || VolunteerRole === 'volunteer'){
+      console.log('Volunteer is Logged In')
+      return !(VolunteerUser === null)
+    }else{
+      return false
+    }
+   
+  }
+
   logout(){
     sessionStorage.removeItem('auth');   
+    localStorage.removeItem('role');
   }
 }

@@ -5,7 +5,8 @@
     </div>
     <ul class="navbar-nav">
         <li><a *ngIf="authentication.isUserLoggedIn()" routerLink="/login" class="nav-link">Home</a></li>
-        <li><a *ngIf="authentication.isUserLoggedIn()" routerLink="/volunteer" class="nav-link">Volunteer</a></li>
+        <li><a *ngIf="authentication.isPOCLoggedIn()" routerLink="/pocdash" class="nav-link">POC DashBoard</a></li>
+        <li><a *ngIf="authentication.isVolunteerLoggedIn()" routerLink="/volunteerdash" class="nav-link">Volunteer DashBoard</a></li>
     </ul>
     <ul class="navbar-nav navbar-collapse justify-content-end">
         <li><a *ngIf="!authentication.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>

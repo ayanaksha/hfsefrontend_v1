@@ -4,6 +4,7 @@ import { HelloworldmsgService } from '../service/data/helloworldmsg.service';
 import { userRegistration } from 'src/app/classes/AllClasses';
 import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 // const httpOptions = {
 //   headers: new HttpHeaders({ 
 //     'Access-Control-Allow-Origin':'*'
@@ -30,16 +31,25 @@ export class RegisterComponent implements OnInit {
   role:  string;
   useremailid: string;
   jsonData: any;
+  durationInSeconds = 5;
 
   //ActivatedRoute
   constructor(private route: ActivatedRoute,
     private userAPIService: UserServiceService,
     private service: HelloworldmsgService,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log(this.route.snapshot.params['name'])
     this.username = this.route.snapshot.params['name']
+    // this.buid = '';
+    // this.empid = 0;
+    // this.empname = '';
+    // this.password = '';
+    // this.id = 0;
+    // this.projid = 0;
+    // this.role = '';
     
   }
 
@@ -64,7 +74,15 @@ export class RegisterComponent implements OnInit {
     this.userAPIService.registerUser(newUser).subscribe(
       // response => this.handleSuccessfulRequest(response),
       response => {console.log('RegisterUser Response is ' + '' + response)
-      this.router.navigate(['login'])}, 
+      // this.openSnackBar();
+      location.reload();/* Reloads the whole page */
+      console.log('Routing101')
+      // this.router.navigate(['login'])
+      // this.router.navigate([this.router.url])
+      // this.buid = '';
+      // this.empid = 0;
+    }, 
+
       error => this.handleErrorResponse(error)     
     );
 
@@ -101,6 +119,14 @@ export class RegisterComponent implements OnInit {
     // console.log(response);
     // console.log(response.message);
     this.responseMsg = error.error.message;
+  }
+
+  openSnackBar() {
+    let snackBarRef = this.snackBar.open('Message archived');
+  }
+
+  registrationSuccessful(){
+
   }
 
 
