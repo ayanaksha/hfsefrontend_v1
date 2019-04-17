@@ -43,14 +43,14 @@ export class HcauthService {
           this.router.navigate(['pocdash',this.jsonData['loggedInUser'].empid])
           sessionStorage.setItem('auth',empid)
           localStorage.setItem('role',this.jsonData['loggedInUser'].role)
-          this.snackBar.open('Login Successful', 'Undo', {
+          this.snackBar.open('Login Successful', 'X', {
             duration: 3000
           });
         }else if(this.jsonData['loggedInUser'].role == 'Volunteer' || 'volunteer'){
           this.router.navigate(['volunteerdash',this.jsonData['loggedInUser'].empid])
           sessionStorage.setItem('auth',empid)
           localStorage.setItem('role',this.jsonData['loggedInUser'].role)
-          this.snackBar.open('Login Successful', 'Undo', {
+          this.snackBar.open('Login Successful', 'X', {
             duration: 3000
           });
         }
@@ -63,6 +63,7 @@ export class HcauthService {
         
       },
       error => {
+        this.openSnackBar();
         return false;
       });
     return true;
@@ -111,6 +112,12 @@ export class HcauthService {
       return false
     }
    
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Invalid Credentials', 'X', {
+      duration: 3000
+    });
   }
 
   logout(){

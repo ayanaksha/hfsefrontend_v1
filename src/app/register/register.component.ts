@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
     this.userAPIService.registerUser(newUser).subscribe(
       // response => this.handleSuccessfulRequest(response),
       response => {console.log('RegisterUser Response is ' + '' + response)
-      // this.openSnackBar();
+      this.openSnackBar();
       location.reload();/* Reloads the whole page */
       console.log('Routing101')
       // this.router.navigate(['login'])
@@ -122,7 +122,9 @@ export class RegisterComponent implements OnInit {
   }
 
   openSnackBar() {
-    let snackBarRef = this.snackBar.open('Message archived');
+    this.snackBar.open('Registered Successfully', 'X', {
+      duration: 3000
+    });
   }
 
   registrationSuccessful(){

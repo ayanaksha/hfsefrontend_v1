@@ -9,6 +9,8 @@ import { RouteGuardService } from './service/route-guard.service';
 import { StatsComponent } from './stats/stats.component';
 import { VolunteerDashComponent } from 'src/app/volunteer-dash/volunteer-dash.component';
 import { PocDashComponent } from 'src/app/poc-dash/poc-dash.component';
+import { NoPreloading } from '@angular/router';
+import { PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   { path:'', component: LoginComponent }
@@ -31,3 +33,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules  })
