@@ -67,7 +67,7 @@ export class VolunteerDashComponent implements OnInit {
     this.userAPIService.getAllEvents(newUser).subscribe(
       // response => this.handleSuccessfulRequest(response),
       response => {
-        console.log('Response is ' + '' + response);
+        console.log('Response for register event...' + '' + response);
         // this.events = response.jsonData;
         this.events = response
         console.log('Events'+this.events);
