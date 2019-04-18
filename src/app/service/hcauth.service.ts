@@ -32,8 +32,13 @@ export class HcauthService {
       //   return true;
       // });
       data => {
+        console.log('data ....');
         console.log(data);
         this.user = data['loggedInUser'];
+        if(data['loggedInUser'] === null){
+          this.openSnackBar();
+          return false;
+        }
         this.jsonData = data;
         console.log('ROLE',this.jsonData['loggedInUser'].role);
         var userData = new userRegistration;
@@ -53,6 +58,9 @@ export class HcauthService {
           this.snackBar.open('Login Successful', 'X', {
             duration: 3000
           });
+        }else{
+          this.openSnackBar();
+          return false;
         }
         // if (this.user.role = 'POC'){
         //   console.log('Routing to volunteer');
