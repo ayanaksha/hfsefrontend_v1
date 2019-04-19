@@ -5,6 +5,10 @@ import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { eventDataService } from 'src/app/service/data/event-data.service';
 import { userRegistration, eventCreate } from 'src/app/classes/AllClasses';
+import { ExcelService } from 'src/app/service/data/excel.service';
+// import * as XLSX from 'ts-xlsx';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-poc-dash',
@@ -14,6 +18,33 @@ import { userRegistration, eventCreate } from 'src/app/classes/AllClasses';
 export class PocDashComponent implements OnInit {
   empid: any;
   fileToUpload: File = null;
+  data: any = [{
+    Event_Date: 'fgfgfgfgfgg',
+    Location: ' ',
+    Venue_Address: ' ',
+    council: ' ',
+    category: ' ',
+    Event_Name: ' ',
+    Event_Desc: ' ',
+    activity_type: ' ',
+    Status: ' ',
+    poc_id: ' ',
+    poc_name: ' ',
+    start_time: ' ',
+    end_time: ' ',
+    volunteers_req: ' ',
+    boarding_points: ' ',
+    drop_points: ' ',
+    lives_touched: ' '
+    }];
+    // eid: 'e102',
+    // ename: 'ram',
+    // esal: 2000
+    // },{
+    // eid: 'e103',
+    // ename: 'rajesh',
+    // esal: 3000
+    // }];
   userData: userRegistration;
   responseMsg: any;
   // events: eventCreate[];
@@ -23,7 +54,8 @@ export class PocDashComponent implements OnInit {
 
   constructor(private fileUploadService: UserServiceService,
               private getUserDataService: eventDataService,
-              private userAPIService: UserServiceService) { }
+              private userAPIService: UserServiceService,
+              private excelService: ExcelService) { }
 
   ngOnInit() {
     console.log('Getting User Details');
@@ -36,9 +68,38 @@ export class PocDashComponent implements OnInit {
     console.log(this.userData.userEmailId);
     this.getAllEventsByPOC();
   }
-  
-  uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
 
+  uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
+  
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.data, 'sample');
+ }
+ arrayBuffer:any;
+ file:File;
+ incomingfile(event) 
+   {
+   this.file= event.target.files[0]; 
+   }
+ 
+  Upload() {
+       let fileReader = new FileReader();
+         fileReader.onload = (e) => {
+             this.arrayBuffer = fileReader.result;
+             var data = new Uint8Array(this.arrayBuffer);
+             var arr = new Array();
+             for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+             var bstr = arr.join("");
+             var workbook = XLSX.read(bstr, {type:"binary"});
+             var first_sheet_name = workbook.SheetNames[0];
+             var worksheet = workbook.Sheets[first_sheet_name];
+             console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+         }
+         fileReader.readAsArrayBuffer(this.file);
+         console.log('file data'+this.file)
+         console.log('eventID'+ this.file['eventID'])
+        //  this.handleBulkEventRegistration();
+ }
+  // uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
   getAllEventsByPOC(){
     console.log('Getting all Events By POC......')
     // console.log('BUID' + this.userData.buid)
@@ -65,6 +126,7 @@ export class PocDashComponent implements OnInit {
         console.log('Response is ' + '' + response);
         // this.events = response.jsonData;
         this.events = response
+        this.data = this.events
         console.log('Events'+this.events);
       }, 
       // data => {
@@ -72,8 +134,59 @@ export class PocDashComponent implements OnInit {
       //   this.events = data;
       // },
       error => this.handleErrorResponse(error)     
-    )};
-
+  )};
+  
+  handleBulkEventRegistration(){
+      console.log('Event Registration processing......')
+      // console.log('activityType' + this.activityType)
+      // console.log('boardingPoints' + this.boardingPoints)
+      // console.log('category' + this.category)
+      // console.log('council' + this.council)
+      // console.log('dropPoints' + this.dropPoints)
+      // console.log('endTime' + this.endTime)
+      // console.log('eventDate' + this.eventDate)
+      // console.log('eventDesc' + this.eventDesc)
+      // console.log('eventID' + this.eventID)
+      // console.log('eventName' + this.eventName)
+      // console.log('livesTouched' + this.livesTouched)
+      // console.log('location' + this.location)
+      // console.log('pocID' + this.pocID)
+      // console.log('pocName' + this.pocName)
+      // console.log('startTime' + this.startTime)
+      // console.log('status' + this.status)
+      // console.log('venueAddress' + this.venueAddress)
+      // console.log('volunteersReq' + this.volunteersReq)
+  
+      var newEvent = new eventCreate;
+      console.log('eventID'+ this.file['eventID'])
+      newEvent = this.file['eventID'];
+      // newEvent.activityType = this.activityType;
+      // newEvent.boardingPoints = this.boardingPoints;
+      // newEvent.category = this.category;
+      // newEvent.council = this.council;
+      // newEvent.dropPoints = this.dropPoints;
+      // newEvent.endTime = this.endTime;
+      // newEvent.eventDate = this.eventDate;
+      // newEvent.eventDesc = this.eventDesc;
+      // newEvent.eventID = this.eventID;
+      // newEvent.eventName = this.eventName;
+      // newEvent.location = this.location;
+      // newEvent.pocID = this.pocID;
+      // newEvent.pocName = this.pocName;
+      // newEvent.startTime = this.startTime;
+      // newEvent.status = this.status;
+      // newEvent.venueAddress = this.venueAddress;
+      // newEvent.volunteersReq = this.volunteersReq;
+  
+      this.userAPIService.registerEvent(newEvent).subscribe(
+        // response => this.handleSuccessfulRequest(response),
+        response => {console.log('Response is ' + '' + response)}, 
+        error => this.handleErrorResponse(error)     
+      );
+  
+  }
+  
+   
   handleSuccessfulRequest(response){
     // console.log(response);
     // console.log(response.message);

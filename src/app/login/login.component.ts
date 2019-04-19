@@ -17,12 +17,18 @@ export class LoginComponent implements OnInit {
   password = 'password'
   errmessage = "Invalid Credentials"
   invalidLogin = false
+  breakpoint: number;
 
   constructor(private router: Router,
     private authentication: HcauthService,
     private userservice2: UserServiceService) { }
    
   ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 800) ? 1 : 2;
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 800) ? 1 : 2;
   }
 
   handleLogin(){

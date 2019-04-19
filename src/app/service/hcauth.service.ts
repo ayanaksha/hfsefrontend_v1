@@ -36,7 +36,7 @@ export class HcauthService {
         console.log(data);
         this.user = data['loggedInUser'];
         if(data['loggedInUser'] === null){
-          this.openSnackBar();
+          this.openSnackBar('Invalid Credentials');
           return false;
         }
         this.jsonData = data;
@@ -48,18 +48,14 @@ export class HcauthService {
           this.router.navigate(['pocdash',this.jsonData['loggedInUser'].empid])
           sessionStorage.setItem('auth',empid)
           localStorage.setItem('role',this.jsonData['loggedInUser'].role)
-          this.snackBar.open('Login Successful', 'X', {
-            duration: 3000
-          });
+          this.openSnackBar('POC logged in successfully');
         }else if(this.jsonData['loggedInUser'].role == 'Volunteer' || 'volunteer'){
           this.router.navigate(['volunteerdash',this.jsonData['loggedInUser'].empid])
           sessionStorage.setItem('auth',empid)
           localStorage.setItem('role',this.jsonData['loggedInUser'].role)
-          this.snackBar.open('Login Successful', 'X', {
-            duration: 3000
-          });
+          this.openSnackBar('Volunteer logged in successfully');
         }else{
-          this.openSnackBar();
+          this.openSnackBar('Invalid Credentials');
           return false;
         }
         // if (this.user.role = 'POC'){
@@ -71,7 +67,7 @@ export class HcauthService {
         
       },
       error => {
-        this.openSnackBar();
+        this.openSnackBar('Invalid Credentials');
         return false;
       });
     return true;
@@ -122,8 +118,8 @@ export class HcauthService {
    
   }
 
-  openSnackBar() {
-    this.snackBar.open('Invalid Credentials', 'X', {
+  openSnackBar(msg:string) {
+    this.snackBar.open(msg, 'X', {
       duration: 3000
     });
   }
