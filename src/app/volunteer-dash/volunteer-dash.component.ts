@@ -33,6 +33,7 @@ export class VolunteerDashComponent implements OnInit {
 
   ngOnInit() {
     console.log('Getting User Details');
+    var userDataVolunteerDash = new userRegistration();
     this.userData = this.getUserDataService.getUserData();
     console.log(this.userData.buid);
     console.log(this.userData.empid);

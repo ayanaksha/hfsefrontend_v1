@@ -50,7 +50,9 @@ export class PocDashComponent implements OnInit {
   // events: eventCreate[];
   // events: Array<eventCreate> = [];
   events:eventCreate;
+  newEvent: eventCreate[];
   teststring: string; /* test */
+  // message : string;
 
   constructor(private fileUploadService: UserServiceService,
               private getUserDataService: eventDataService,
@@ -60,6 +62,10 @@ export class PocDashComponent implements OnInit {
   ngOnInit() {
     console.log('Getting User Details');
     this.userData = this.getUserDataService.getUserData();
+    // this.getUserDataService.currentMessage.subscribe(
+    //   message => {this.message = message;
+    //   console.log('messge is'+ this.message)}
+    //   );
     console.log(this.userData.buid);
     console.log(this.userData.empid);
     console.log(this.userData.empname);
@@ -76,28 +82,32 @@ export class PocDashComponent implements OnInit {
  }
  arrayBuffer:any;
  file:File;
+ jsonData: any;
  incomingfile(event) 
    {
    this.file= event.target.files[0]; 
    }
  
   Upload() {
-       let fileReader = new FileReader();
-         fileReader.onload = (e) => {
-             this.arrayBuffer = fileReader.result;
-             var data = new Uint8Array(this.arrayBuffer);
-             var arr = new Array();
-             for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-             var bstr = arr.join("");
-             var workbook = XLSX.read(bstr, {type:"binary"});
-             var first_sheet_name = workbook.SheetNames[0];
-             var worksheet = workbook.Sheets[first_sheet_name];
-             console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
-         }
-         fileReader.readAsArrayBuffer(this.file);
-         console.log('file data'+this.file)
-         console.log('eventID'+ this.file['eventID'])
-        //  this.handleBulkEventRegistration();
+        let fileReader = new FileReader();
+          fileReader.onload = (e) => {
+              this.arrayBuffer = fileReader.result;
+              var data = new Uint8Array(this.arrayBuffer);
+              var arr = new Array();
+              for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+              var bstr = arr.join("");
+              var workbook = XLSX.read(bstr, {type:"binary"});
+              var first_sheet_name = workbook.SheetNames[0];
+              var worksheet = workbook.Sheets[first_sheet_name];
+              console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+              this.newEvent = XLSX.utils.sheet_to_json(worksheet,{raw:true});
+              console.log('new Event' + this.newEvent);
+              this.handleBulkEventRegistration();
+          }
+          fileReader.readAsArrayBuffer(this.file);
+        //  console.log('file data'+this.file)
+        //  console.log('eventID'+ this.jsonData['eventID'])
+          
  }
   // uploader: FileUploader = new FileUploader({ url: "api/your_upload", removeAfterUpload: false, autoUpload: true });
   getAllEventsByPOC(){
@@ -156,33 +166,33 @@ export class PocDashComponent implements OnInit {
       // console.log('status' + this.status)
       // console.log('venueAddress' + this.venueAddress)
       // console.log('volunteersReq' + this.volunteersReq)
-  
-      var newEvent = new eventCreate;
-      console.log('eventID'+ this.file['eventID'])
-      newEvent = this.file['eventID'];
-      // newEvent.activityType = this.activityType;
-      // newEvent.boardingPoints = this.boardingPoints;
-      // newEvent.category = this.category;
-      // newEvent.council = this.council;
-      // newEvent.dropPoints = this.dropPoints;
-      // newEvent.endTime = this.endTime;
-      // newEvent.eventDate = this.eventDate;
-      // newEvent.eventDesc = this.eventDesc;
-      // newEvent.eventID = this.eventID;
-      // newEvent.eventName = this.eventName;
-      // newEvent.location = this.location;
-      // newEvent.pocID = this.pocID;
-      // newEvent.pocName = this.pocName;
-      // newEvent.startTime = this.startTime;
-      // newEvent.status = this.status;
-      // newEvent.venueAddress = this.venueAddress;
-      // newEvent.volunteersReq = this.volunteersReq;
-  
-      this.userAPIService.registerEvent(newEvent).subscribe(
-        // response => this.handleSuccessfulRequest(response),
-        response => {console.log('Response is ' + '' + response)}, 
-        error => this.handleErrorResponse(error)     
-      );
+      console.log('before looping......');
+      console.log('newEvent' + this.newEvent);
+      for(let key in this.newEvent){
+        // newEvent.activityType = this.activityType;
+        // newEvent.boardingPoints = this.boardingPoints;
+        // newEvent.category = this.category;
+        // newEvent.council = this.council;
+        // newEvent.dropPoints = this.dropPoints;
+        // newEvent.endTime = this.endTime;
+        // newEvent.eventDate = this.eventDate;
+        // newEvent.eventDesc = this.eventDesc;
+        // newEvent.eventID = this.eventID;
+        // newEvent.eventName = this.eventName;
+        // newEvent.location = this.location;
+        // newEvent.pocID = this.pocID;
+        // newEvent.pocName = this.pocName;
+        // newEvent.startTime = this.startTime;
+        // newEvent.status = this.status;
+        // newEvent.venueAddress = this.venueAddress;
+        // newEvent.volunteersReq = this.volunteersReq;
+        console.log('evenData' + this.newEvent[key]);
+        this.userAPIService.registerEvent(this.newEvent[key]).subscribe(
+          // response => this.handleSuccessfulRequest(response),
+          response => {console.log('Response from Bulk Upload is ' + '' + response)}, 
+          error => this.handleErrorResponse(error)     
+        );
+      }
   
   }
   

@@ -18,10 +18,10 @@ const routes: Routes = [
   ,{ path:'login/:name', component: LoginComponent }
   ,{ path:'register/:name', component: RegisterComponent, canActivate:[RouteGuardService] }
   ,{ path:'volunteer', component: VolunteerComponent, canActivate:[RouteGuardService] }
-  ,{ path:'volunteerdash', component: VolunteerDashComponent }
-  ,{ path:'volunteerdash/:name', component: VolunteerDashComponent }
-  ,{ path:'pocdash', component: PocDashComponent }
-  ,{ path:'pocdash/:name', component: PocDashComponent }
+  ,{ path:'volunteerdash', component: VolunteerDashComponent, canActivate:[RouteGuardService]   }
+  ,{ path:'volunteerdash/:name', component: VolunteerDashComponent, canActivate:[RouteGuardService]  }
+  ,{ path:'pocdash', component: PocDashComponent, canActivate:[RouteGuardService] }
+  ,{ path:'pocdash/:name', component: PocDashComponent, canActivate:[RouteGuardService]   }
   ,{ path:'logout', component: LogoutComponent, canActivate:[RouteGuardService]}
   ,{ path:'bar-chart', component: StatsComponent } 
   // ,{ path:'**', component: ErrorComponent, canActivate:[RouteGuardService] }

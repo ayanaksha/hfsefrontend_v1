@@ -21,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatDialogModule, MatDividerModule, MatTableModule, MatProgressSpinnerModule,
          MatInputModule, MatTabsModule, MatOptionModule, MatSelectModule, MatGridListModule, 
          MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
-import { MatSnackBarModule } from '@angular/material/snack-bar';         
+import { MatSnackBarModule } from '@angular/material/snack-bar';   
+import { CookieService } from 'ngx-cookie-service';      
 import { LayoutModule } from '@angular/cdk/layout';
 import { TestComponent } from './test/test.component';
 import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.component';
@@ -72,7 +73,7 @@ import { EventregComponent } from './eventreg/eventreg.component';
     MatGridListModule,
     LayoutModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
