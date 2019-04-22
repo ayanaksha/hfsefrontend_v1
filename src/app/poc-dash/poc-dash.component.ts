@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material';
+import {MatDividerModule, MatSnackBar} from '@angular/material';
 import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { eventDataService } from 'src/app/service/data/event-data.service';
@@ -57,7 +57,8 @@ export class PocDashComponent implements OnInit {
   constructor(private fileUploadService: UserServiceService,
               private getUserDataService: eventDataService,
               private userAPIService: UserServiceService,
-              private excelService: ExcelService) { }
+              private excelService: ExcelService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log('Getting User Details');
@@ -102,6 +103,7 @@ export class PocDashComponent implements OnInit {
               console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
               this.newEvent = XLSX.utils.sheet_to_json(worksheet,{raw:true});
               console.log('new Event' + this.newEvent);
+              this.openSnackBar('File has been uploaded');
               this.handleBulkEventRegistration();
           }
           fileReader.readAsArrayBuffer(this.file);
@@ -189,14 +191,22 @@ export class PocDashComponent implements OnInit {
         console.log('evenData' + this.newEvent[key]);
         this.userAPIService.registerEvent(this.newEvent[key]).subscribe(
           // response => this.handleSuccessfulRequest(response),
-          response => {console.log('Response from Bulk Upload is ' + '' + response)}, 
-          error => this.handleErrorResponse(error)     
+          response => {console.log('Response from Bulk Upload is ' + '' + response)
+          this.openSnackBar('Events have been created')
+          location.reload();/* Reloads the whole page */}, 
+          error => {
+            this.handleErrorResponse(error)}     
         );
       }
   
   }
   
-   
+  openSnackBar(resp:string) {
+    this.snackBar.open(resp, 'X', {
+      duration: 3000
+    });
+  }
+
   handleSuccessfulRequest(response){
     // console.log(response);
     // console.log(response.message);

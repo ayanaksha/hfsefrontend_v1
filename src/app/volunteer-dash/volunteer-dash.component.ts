@@ -2,7 +2,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatTabsModule} from '@angular/material/tabs';
 import { Component, OnInit } from '@angular/core';
 // import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material';
+import {MatDividerModule, MatSnackBar} from '@angular/material';
 import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { eventDataService } from 'src/app/service/data/event-data.service';
@@ -29,7 +29,8 @@ export class VolunteerDashComponent implements OnInit {
   constructor(private fileUploadService: UserServiceService,
               private getUserDataService: eventDataService,
               private userAPIService: UserServiceService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log('Getting User Details');
@@ -134,7 +135,10 @@ export class VolunteerDashComponent implements OnInit {
         // this.events = response.jsonData;
         this.newRegistrationResponse = response
         console.log('Events'+this.newRegistrationResponse);
-        this.router.navigate(['volunteerdash',this.userData.empid])
+        console.log('EmpID before redirect'+ this.userData.empid)
+        this.openSnackBar('Registered successfully for Event !!!');
+        // this.router.navigate(['volunteerdash',this.userData.empid])
+        location.reload();/* Reloads the whole page */
       }, 
       // data => {
       //   console.log('Response is ' + '' + data)
@@ -144,6 +148,12 @@ export class VolunteerDashComponent implements OnInit {
     
     )};
 
+  openSnackBar(resp:string) {
+    this.snackBar.open(resp, 'X', {
+      duration: 3000
+    });
+  }
+    
   handleSuccessfulRequest(response){
     // console.log(response);
     // console.log(response.message);

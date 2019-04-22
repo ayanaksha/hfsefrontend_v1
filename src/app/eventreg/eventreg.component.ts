@@ -3,6 +3,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { eventCreate } from 'src/app/classes/AllClasses';
 import { UserServiceService } from 'src/app/service/data/user-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-eventreg',
@@ -34,7 +35,8 @@ export class EventregComponent implements OnInit {
   volunteersReq: string;
 
   constructor(private route: ActivatedRoute,
-              private userAPIService: UserServiceService) { }
+              private userAPIService: UserServiceService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -81,10 +83,18 @@ export class EventregComponent implements OnInit {
 
     this.userAPIService.registerEvent(newEvent).subscribe(
       // response => this.handleSuccessfulRequest(response),
-      response => {console.log('Response is ' + '' + response)}, 
-      error => this.handleErrorResponse(error)     
+      response => {console.log('Response is ' + '' + response)
+      this.openSnackBar('Registration Completed');}, 
+      error => {this.handleErrorResponse(error)
+        this.openSnackBar('Registration Completed');}     
     );
 
+  }
+
+  openSnackBar(resp:string) {
+    this.snackBar.open(resp, 'X', {
+      duration: 3000
+    });
   }
 
   handleSuccessfulRequest(response){

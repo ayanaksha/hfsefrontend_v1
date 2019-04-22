@@ -10,9 +10,9 @@ import { userID } from 'src/app/classes/userID';
 })
 export class UserServiceService {
   LoginEndPoint: string;
-  // allUrl = 'http://172.18.1.174:8084/allUI';
-  allUrl = 'http://localhost:5000';
-  volunteerUrl = 'http://172.18.1.174:8084/volunteerUI'
+  allUrl = 'http://172.18.2.145:8084/allUI';
+  // allUrl = 'http://localhost:5000';
+  volunteerUrl = 'http://172.18.2.145:8084/volunteerUI'
 
   constructor(private http:HttpClient) { }
 
@@ -34,7 +34,6 @@ export class UserServiceService {
   // : eventRegistration
   registerEvent(newEvent): Observable<any>{
     const url = this.allUrl + "/api/v1/online-sales-service/createEvent";
-    // return this.http.post(url,newEvent, {responseType: 'text'})
     return this.http.post(url,newEvent, {responseType: 'text'})
   }
 
@@ -48,6 +47,12 @@ export class UserServiceService {
   getAllEvents(newUser): Observable<any>{
     const url = this.allUrl + "/api/v1/online-sales-service/allEventSummary";
     return this.http.post(url,newUser,{responseType: 'json'})
+  }
+
+  // : getAllRegisteredEvents
+  getAllRegisteredEvents(): Observable<any>{
+    const url = this.allUrl + "/api/v1/online-sales-service/allEventRegistration";
+    return this.http.post(url,{responseType: 'json'})
   }
 
   // : volunteerEventRegiistration

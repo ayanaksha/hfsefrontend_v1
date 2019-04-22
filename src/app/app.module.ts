@@ -28,6 +28,7 @@ import { TestComponent } from './test/test.component';
 import { VolunteerDashComponent } from './volunteer-dash/volunteer-dash.component';
 import { PocDashComponent } from './poc-dash/poc-dash.component';
 import { EventregComponent } from './eventreg/eventreg.component';
+import { Stats2Component } from './stats2/stats2.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EventregComponent } from './eventreg/eventreg.component';
     TestComponent,
     VolunteerDashComponent,
     PocDashComponent,
-    EventregComponent
+    EventregComponent,
+    Stats2Component
   ],
   imports: [
     BrowserModule,
