@@ -46,8 +46,9 @@ export class Stats2Component implements OnInit {
           for(let key in data){
            console.log('key' + key); 
            if(data.hasOwnProperty(key)){
-             console.log('ProjID 1' + this.userData.projId);
-             console.log('ProjID 2' + data[key]['empProjId']);
+
+            //  console.log('ProjID 1' + this.userData.projId);
+            //  console.log('ProjID 2' + data[key]['empProjId']);
              if(data[key]['empProjId'] == this.userData.projId){
                // Search eventID in existing array if found increase the count by 1
                this.searchEventID(data[key]['eventID'])
